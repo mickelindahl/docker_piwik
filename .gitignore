@@ -1,2 +1,8 @@
 # No compose yml
 docker-compose.yml
+
+# No mysql
+mysql
+
+# No config
+config
