@@ -1,31 +1,10 @@
-user www-data;
-
-events {
-  worker_connections 768;
-}
-
-http {
-  upstream backend {
-    server app:9000;
-  }
-
-  include /etc/nginx/mime.types;
-  default_type application/octet-stream;
-  gzip on;
-  gzip_disable "msie6";
-  
-  server {
-    listen 80;
-
+    
     root /var/www/html/;
     index index.php index.html index.htm;
 
-    location / {
-      try_files $uri $uri/ =404;
-    }
-
     error_page 404 /404.html;
     error_page 500 502 503 504 /50x.html;
+
     location = /50x.html {
       root /usr/share/nginx/html;
     }
@@ -34,6 +13,7 @@ http {
       log_not_found off;
       access_log off;
     }
+
    
     location ~ \.php$ {
       fastcgi_param  GATEWAY_INTERFACE  CGI/1.1;
@@ -54,9 +34,12 @@ http {
       fastcgi_param  SERVER_PORT        $server_port;
       fastcgi_param  SERVER_NAME        $server_name;
       fastcgi_intercept_errors on;
-      fastcgi_pass backend;
+      fastcgi_pass {your domain/subdomain};
     }
-  }
-}
 
 
+    # Pick up everything else to avoid getting to / where the
+    # proxyforwarding is
+    location ~ ^/(?!(\.php)) { 
+         try_files $uri $uri/ =404; 
+    } 

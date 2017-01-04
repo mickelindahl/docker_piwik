@@ -4,5 +4,5 @@ docker-compose.yml
 # No mysql
 mysql
 
-# No config
-config
+# No mounts
+html
