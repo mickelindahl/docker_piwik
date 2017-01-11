@@ -8,7 +8,7 @@ as a reverse proxy.
 
 Clone the repository and cd into project directory
 
-Run `cp sample.docker-compose.yml docker.compose.yml`
+Run `cp sample-docker-compose.yml docker.compose.yml`
 
 Open `docker.compose.yml` and add a prefered mysql outgoing port and set VIRTUAL_HOST
 to the domain/subdomain you want to use for your piwik server. One can also remove 
@@ -28,16 +28,16 @@ volumes:
   - {path to project directory}/html:/var/www/html # add
 ``` 
 
-Run `cp {your domain/subdomain} setup.domain.com`
+Run `cp setup.domain.com {your domain/subdomain}`
 
 Open the newly created file and add your subdomain for the fastcgi_pass
 
-Copy the file to conf/vhost in nginx project directory. It is important the
+Copy the file to `conf/vhost.d/` in nginx project directory. It is important the
 the file has the exakt name of you domain/subdomain you want to use
 
 Cd into nginx docker project folder and run
 ```
-docker-compose stop && docker-compose rm && docker-compose up -d
+docker-compose stop && docker-compose rm -f && docker-compose up -d
 ``` 
 
 Now piwik should be availabe at you domain/subdomain!!!
