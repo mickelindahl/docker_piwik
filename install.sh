@@ -1,8 +1,20 @@
-if [ ! -f .env ]; then 
+if [ ! -f .env ]; then
 
    echo "Missing .env please create it by cp sample.env .env and then edit .env"
 
 fi
+
+if [ -d $(pwd)/myqsl ]; then
+
+   read -p "Remove mysql db? (Neccesary if new password been set N|y)" choice
+   case "$choice" in
+       N|n ) echo "Keeping db";;
+       Y|y ) rm -r mysql;;
+       * ) echo "Keeping db";;
+   esac
+
+fi
+read -p "Remove mysql db? (Neccesary if new password been set N|y)"
 
 CURRENT_DIR=$(pwd)
 
