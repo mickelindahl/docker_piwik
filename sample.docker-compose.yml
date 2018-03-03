@@ -12,7 +12,7 @@ services:
     network_mode: "bridge"
     restart: always
   app:
-    image: piwik:3.3
+    image: piwik:3.0.0
     links:
       - db
     volumes:
@@ -22,7 +22,7 @@ services:
     network_mode: "bridge"
     restart: always
   cron:
-    image: piwik:3.3
+    image: piwik:3.0.0
     links:
       - db
     volumes:
