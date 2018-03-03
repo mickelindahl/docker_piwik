@@ -1,7 +1,7 @@
-version: '3'
+version: '2'
 
 services:
-  db:
+  piwik-db:
     image: mysql:5.7
     ports:
       - "{db-external-port}:3306"
@@ -12,9 +12,9 @@ services:
     network_mode: "bridge"
     restart: always
   app:
-    image: piwik:3.3
+    image: piwik:3.0.0
     links:
-      - db
+      - piwik-db
     volumes:
       - ./html:/var/www/html
     environment:
@@ -22,11 +22,12 @@ services:
     network_mode: "bridge"
     restart: always
   cron:
-    image: piwik:3.3
+    image: piwik:3.0.0
     links:
-      - db
-    volumes:
-      - ./html:/var/www/html
+      - piwik-db
+    volumes_from:
+      - app
+      #- ./html:/var/www/html
     entrypoint: |
       bash -c 'bash -s <<EOF
       trap "break;exit" SIGHUP SIGINT SIGTERM
