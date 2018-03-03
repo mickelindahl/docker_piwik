@@ -4,17 +4,19 @@ if [ ! -f .env ]; then
 
 fi
 
-if [ -d $(pwd)/myqsl ]; then
+if [ -d $(pwd)/mysql ]; then
 
    read -p "Remove mysql db? (Neccesary if new password been set N|y)" choice
+
+   echo Choice: "$choice"
+
    case "$choice" in
        N|n ) echo "Keeping db";;
-       Y|y ) rm -r mysql;;
+       Y|y ) echo "Removing mysql" && rm -r $(pwd)/mysql;;
        * ) echo "Keeping db";;
    esac
 
 fi
-read -p "Remove mysql db? (Neccesary if new password been set N|y)"
 
 CURRENT_DIR=$(pwd)
 
