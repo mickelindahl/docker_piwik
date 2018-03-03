@@ -34,7 +34,7 @@
       fastcgi_param  SERVER_PORT        $server_port;
       fastcgi_param  SERVER_NAME        $server_name;
       fastcgi_intercept_errors on;
-      fastcgi_pass {your domain/subdomain};
+      fastcgi_pass {virtual-host};
     }
 
 

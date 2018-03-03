@@ -1,32 +1,32 @@
-version: '2'
+version: '3'
 
 services:
   db:
     image: mysql:5.7
     ports:
-      - "{port to map}:3306"
+      - "{db-external-port}:3306"
     volumes:
       - ./mysql/runtime:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: {db-pass}
     network_mode: "bridge"
     restart: always
   app:
-    image: piwik:3.0
+    image: piwik:3.3
     links:
       - db
     volumes:
       - ./html:/var/www/html
     environment:
-       VIRTUAL_HOST: {your virtual host :-)}
+       VIRTUAL_HOST: {virtual-host}
     network_mode: "bridge"
     restart: always
   cron:
-    image: piwik
+    image: piwik:3.3
     links:
       - db
-    volumes_from:
-      - app
+    volumes:
+      - ./html:/var/www/html
     entrypoint: |
       bash -c 'bash -s <<EOF
       trap "break;exit" SIGHUP SIGINT SIGTERM

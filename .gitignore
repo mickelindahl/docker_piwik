@@ -6,3 +6,6 @@ mysql
 
 # No mounts
 html
+
+# No envronent variables
+.env
