@@ -1,3 +1,6 @@
+#!/bin/bash
+
+
 if [ ! -f .env ]; then
 
    echo "Missing .env please create it by cp sample.env .env and then edit .env"
@@ -50,5 +53,7 @@ echo "Database server: db"
 echo "Login: root"
 echo "Password: $DB_PASS"
 echo "Database name: piwik" 
-
+echo "[proxy]"
+echo "host =      ; Proxy host: the host name of your proxy server (mandatory)"
+echo "port =      ; Proxy port: the port that the proxy server listens to. There is no standard default, but 80, 1080, 3128, and 8080 are popular"
 
