@@ -44,7 +44,7 @@ mv $VIRTUAL_HOST $PATH_NGINX/conf/vhost.d/$VIRTUAL_HOST
 docker-compose stop
 docker-compose rm -f
 
-docker-compose up -d
+docker-compose --compatibility up -d
 
 echo ""
 echo "Please navigate to $VIRTUAL_HOST and follow the setup"
